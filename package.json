@@ -1,0 +1,41 @@
+{
+  "name": "express-common-routes",
+  "version": "0.0.1",
+  "description": "Common routes for express",
+  "main": "lib/index.js",
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "files": [
+    "lib"
+  ],
+  "scripts": {
+    "start": "node public/server.js",
+    "clean": "rm -rf ./lib ./public",
+    "build": "npm run clean && babel src -d lib && babel examples -d public"
+  },
+  "dependencies": {
+    "express": "^4.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "babel-preset-es2015": "^6.9.0",
+    "babel-preset-stage-0": "^6.5.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jsmodule/express-common-routes.git"
+  },
+  "keywords": [
+    "nodejs",
+    "express",
+    "routes"
+  ],
+  "author": "thomascxq <thomascxq@gmail.com>",
+  "contributors": [],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/jsmodule/express-common-routes/issues"
+  },
+  "homepage": "https://github.com/jsmodule/express-common-routes#readme"
+}
