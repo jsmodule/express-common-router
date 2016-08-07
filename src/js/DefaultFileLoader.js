@@ -4,7 +4,7 @@ import path from 'path';
 class DefaultFileLoader {
   constructor() { }
 
-  loadControllerFiles(filePath) {
+  loadFiles(filePath) {
     return fs.readdirSync(filePath).map((file) => {
       return path.format({dir: filePath, base: file});
     });

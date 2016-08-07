@@ -11,6 +11,6 @@ describe('DefaultFileLoader', () => {
 
   it('should return correct files when give a exist path', () => {
     let filePath = path.join(__dirname, './fixtures/');
-    expect(fileLoader.loadControllerFiles(filePath)).to.have.lengthOf(2);
+    expect(fileLoader.loadFiles(filePath)).to.have.lengthOf(2);
   });
 });
