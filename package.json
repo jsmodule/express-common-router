@@ -1,5 +1,5 @@
 {
-  "name": "express-common-routes",
+  "name": "express-common-router",
   "version": "0.0.1",
   "description": "Common routes for express",
   "main": "lib/index.js",
@@ -28,12 +28,13 @@
     "chai": "^3.5.0",
     "eslint": "^3.2.0",
     "mocha": "^3.0.0",
+    "path": "^0.12.7",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jsmodule/express-common-routes.git"
+    "url": "git+https://github.com/jsmodule/express-common-router.git"
   },
   "keywords": [
     "nodejs",
@@ -44,7 +45,7 @@
   "contributors": [],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/jsmodule/express-common-routes/issues"
+    "url": "https://github.com/jsmodule/express-common-router/issues"
   },
-  "homepage": "https://github.com/jsmodule/express-common-routes#readme"
+  "homepage": "https://github.com/jsmodule/express-common-router#readme"
 }
