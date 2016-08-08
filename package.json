@@ -14,10 +14,13 @@
     "lint": "eslint src",
     "clean": "rm -rf ./lib ./public",
     "build": "npm run clean && babel src -d lib && babel examples -d public",
-    "test": "mocha --compilers js:babel-register test/js/"
+    "test": "mocha --compilers js:babel-register test/js/",
+    "all-test": "npm run lint && npm run test"
   },
   "dependencies": {
-    "express": "^4.14.0"
+    "express": "^4.14.0",
+    "methods": "^1.1.2",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "babel-cli": "^6.11.4",
@@ -28,7 +31,6 @@
     "chai": "^3.5.0",
     "eslint": "^3.2.0",
     "mocha": "^3.0.0",
-    "path": "^0.12.7",
     "sinon": "^1.17.5",
     "sinon-chai": "^2.8.0"
   },
