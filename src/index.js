@@ -1,1 +1,1 @@
-export HelloWorld from './js/HelloWorld';
+export ExpressCommonRouter from './js/ExpressCommonRouter';

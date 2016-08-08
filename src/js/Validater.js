@@ -3,6 +3,10 @@ class Validater {
     return obj !== undefined && obj !== null;
   }
 
+  static isValidFun(obj) {
+    return typeof obj === 'function';
+  }
+
   static isNotEmptyObj(obj) {
     return Validater.isValidObj(obj) && Object.keys(obj).length > 0;
   }

@@ -5,7 +5,7 @@ class DefaultControllerLoader {
 
   loadController(controllerFile) {
     let controller = require(controllerFile);
-    if (Validater.isNotEmptyObj(controller)) {
+    if (Validater.isValidFun(controller) || Validater.isNotEmptyObj(controller)) {
       return controller;
     }
   }
