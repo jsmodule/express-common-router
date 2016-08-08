@@ -6,9 +6,9 @@ import DefaultControllerLoader from './DefaultControllerLoader';
 
 class ActionsManager {
   constructor() {
-    this.fLoader = new DefaultFileLoader();
-    this.aLoader = new DefaultActionLoader();
-    this.cLoader = new DefaultControllerLoader();
+    this.fileLoaderVal = new DefaultFileLoader();
+    this.actionLoaderVal = new DefaultActionLoader();
+    this.controllerLoaderVal = new DefaultControllerLoader();
   }
 
   set controllerPath(path) {
@@ -16,15 +16,15 @@ class ActionsManager {
   }
 
   set actionLoader(loader) {
-    this.aLoader = loader;
+    this.actionLoaderVal = loader;
   }
 
   set fileLoader(loader) {
-    this.fLoader = loader;
+    this.fileLoaderVal = loader;
   }
 
   set controllerLoader(loader) {
-    this.cLoader = loader;
+    this.controllerLoaderVal = loader;
   }
 
   get controllers() {
@@ -35,7 +35,7 @@ class ActionsManager {
     if (Validater.isNotEmptyString(handlerName)) {
       let controllerName = this.controllerName(handlerName);
       if (this.hasController(controllerName)) {
-        return this.aLoader.loadAction(this.getController(controllerName), this.actionName(handlerName));
+        return this.actionLoaderVal.loadAction(this.getController(controllerName), this.actionName(handlerName));
       }
     }
   }
@@ -50,8 +50,8 @@ class ActionsManager {
 
   loadControllers() {
     this.controllerList = {};
-    this.fLoader.loadFiles(this.path).forEach((file) => {
-      let controller = this.cLoader.loadController(file);
+    this.fileLoaderVal.loadFiles(this.path).forEach((file) => {
+      let controller = this.controllerLoaderVal.loadController(file);
       if (Validater.isValidObj(controller)) {
         this.controllerList[this.fileName(file)] = controller;
       }
