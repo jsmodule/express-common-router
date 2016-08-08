@@ -4,7 +4,7 @@ import DefaultFileLoader from './DefaultFileLoader';
 import DefaultActionLoader from './DefaultActionLoader';
 import DefaultControllerLoader from './DefaultControllerLoader';
 
-class ActionsManager {
+class ActionManager {
   constructor() {
     this.fileLoaderVal = new DefaultFileLoader();
     this.actionLoaderVal = new DefaultActionLoader();
@@ -72,4 +72,4 @@ class ActionsManager {
   }
 }
 
-export default ActionsManager;
+export default ActionManager;

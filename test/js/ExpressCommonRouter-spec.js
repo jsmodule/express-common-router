@@ -3,16 +3,16 @@ import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import express from 'express';
 import methods from 'methods';
-import ActionsManager from '../../src/js/ActionsManager';
+import ActionManager from '../../src/js/ActionManager';
 import ExpressCommonRouter from '../../src/js/ExpressCommonRouter';
 chai.use(SinonChai);
 
 describe('ExpressCommonRouter', () => {
-  let expressCommonRouter, stubRouter, router, stubActionsManager;
+  let expressCommonRouter, stubRouter, router, stubActionManager;
 
   before(() => {
     stubRouter = sinon.stub(express, 'Router');
-    stubActionsManager = sinon.createStubInstance(ActionsManager);
+    stubActionManager = sinon.createStubInstance(ActionManager);
   });
 
   describe('#routes', () => {
@@ -41,10 +41,10 @@ describe('ExpressCommonRouter', () => {
         spy = sinon.spy(router, method);
         actionSpy = sinon.spy();
         stubRouter.returns(router);
-        stubActionsManager.getAction.withArgs('handlerName').returns(actionSpy);
-        stubActionsManager.getAction.returns(undefined);
+        stubActionManager.getAction.withArgs('handlerName').returns(actionSpy);
+        stubActionManager.getAction.returns(undefined);
         expressCommonRouter = new ExpressCommonRouter();
-        expressCommonRouter.actionsManager = stubActionsManager;
+        expressCommonRouter.actionManager = stubActionManager;
       });
 
       it(`should pass correct parameter to invoke ${method} method of router when got a valid action with handler name`, () => {

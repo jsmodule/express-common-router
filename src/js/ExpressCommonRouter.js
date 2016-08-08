@@ -1,18 +1,18 @@
 import { Router } from 'express';
 import methods from 'methods';
-import ActionsManager from './ActionsManager';
+import ActionManager from './ActionManager';
 
 class ExpressCommonRouter {
   constructor() {
     this.router = new Router();
-    this.manager = new ActionsManager();
+    this.manager = new ActionManager();
   }
 
   set controllerPath(path) {
     this.manager.path = path;
   }
 
-  set actionsManager(manager) {
+  set actionManager(manager) {
     this.manager = manager;
   }
 
