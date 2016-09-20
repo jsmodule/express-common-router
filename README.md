@@ -2,7 +2,11 @@
 
 This is a common router for express.
 
-Build result
+Current Status:
+
+[![NPM version](https://img.shields.io/npm/v/express-common-router.svg)](https://npmjs.org/package/express-common-router)
+[![NPM version](https://img.shields.io/npm/dm/express-common-router.svg)](https://npmjs.org/package/express-common-router)
+[![Build Status](https://travis-ci.org/jsmodule/express-common-router.svg?branch=master)](https://travis-ci.org/jsmodule/express-common-router)
 
 [![NPM](https://nodei.co/npm/express-common-router.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/express-common-router/)
 
