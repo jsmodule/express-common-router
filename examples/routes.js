@@ -1,5 +1,5 @@
 import path from 'path';
-import { ExpressCommonRouter } from '../lib';
+import ExpressCommonRouter from '../lib';
 
 const router = new ExpressCommonRouter();
 router.controllerPath = path.join(__dirname, './js/controllers');

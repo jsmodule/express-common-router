@@ -1,1 +1,2 @@
-export ExpressCommonRouter from './js/ExpressCommonRouter';
+export default from './js/ExpressCommonRouter';
+export ActionManager from './js/ActionManager';

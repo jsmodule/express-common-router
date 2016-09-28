@@ -17,15 +17,15 @@ class ExpressCommonRouter {
   }
 
   set actionLoader(loader) {
-    this.manager.actionLoaderVal = loader;
+    this.manager.actionLoader = loader;
   }
 
   set fileLoader(loader) {
-    this.manager.fileLoaderVal = loader;
+    this.manager.fileLoader = loader;
   }
 
   set controllerLoader(loader) {
-    this.manager.controllerLoaderVal = loader;
+    this.manager.controllerLoader = loader;
   }
 
   routes() {
