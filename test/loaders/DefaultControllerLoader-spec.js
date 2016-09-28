@@ -1,4 +1,4 @@
-import path from 'path';
+import Path from 'path';
 import { expect } from 'chai';
 import SimpleController from '../fixtures/SimpleController';
 import FunctionController from '../fixtures/FunctionController';
@@ -12,17 +12,17 @@ describe('DefaultControllerLoader', () => {
   });
 
   it('should return undefined when given a no export controller', () => {
-    let controllerFile = path.join(__dirname, '../fixtures/NoExportController.js');
+    let controllerFile = Path.join(__dirname, '../fixtures/NoExportController.js');
     expect(controllerLoader.loadController(controllerFile)).to.be.undefined;
   });
 
   it('should return valid controller when given a exist controller', () => {
-    let controllerFile = path.join(__dirname, '../fixtures/SimpleController.js');
+    let controllerFile = Path.join(__dirname, '../fixtures/SimpleController.js');
     expect(controllerLoader.loadController(controllerFile)).to.be.equal(SimpleController);
   });
 
   it('should return valid controller when given a function controller', () => {
-    let controllerFile = path.join(__dirname, '../fixtures/FunctionController.js');
+    let controllerFile = Path.join(__dirname, '../fixtures/FunctionController.js');
     expect(controllerLoader.loadController(controllerFile)).to.be.equal(FunctionController);
   });
 });

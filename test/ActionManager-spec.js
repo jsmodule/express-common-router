@@ -1,11 +1,11 @@
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
+import Sinon from 'sinon';
+import Chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import DefaultFileLoader from '../src/js/loaders/DefaultFileLoader';
 import DefaultActionLoader from '../src/js/loaders/DefaultActionLoader';
 import DefaultControllerLoader from '../src/js/loaders/DefaultControllerLoader';
 import ActionManager from '../src/js/ActionManager';
-chai.use(SinonChai);
+Chai.use(SinonChai);
 
 describe('ActionManager', () => {
   let actionManager, fileLoaderStub, actionLoaderStub, controllerLoaderStub;
@@ -19,11 +19,11 @@ describe('ActionManager', () => {
     let resultControllers, resultObj;
     beforeEach(() => {
       resultObj = {};
-      fileLoaderStub = sinon.createStubInstance(DefaultFileLoader);
+      fileLoaderStub = Sinon.createStubInstance(DefaultFileLoader);
       actionManager.fileLoader = fileLoaderStub;
       fileLoaderStub.loadFiles.returns(['valid.js', 'invalid']);
 
-      controllerLoaderStub = sinon.createStubInstance(DefaultControllerLoader);
+      controllerLoaderStub = Sinon.createStubInstance(DefaultControllerLoader);
       actionManager.controllerLoader = controllerLoaderStub;
       controllerLoaderStub.loadController.withArgs('valid.js').returns(resultObj);
       controllerLoaderStub.loadController.returns(undefined);
@@ -47,7 +47,7 @@ describe('ActionManager', () => {
 
   describe('#hasController', () => {
     beforeEach(() => {
-      sinon.stub(actionManager, '_loadControllers').returns({valid: {}});
+      Sinon.stub(actionManager, '_loadControllers').returns({valid: {}});
     });
 
     it('should return true when has the controller', () => {
@@ -63,7 +63,7 @@ describe('ActionManager', () => {
     let validControler;
     beforeEach(() => {
       validControler = {};
-      sinon.stub(actionManager, '_loadControllers').returns({ valid: validControler });
+      Sinon.stub(actionManager, '_loadControllers').returns({ valid: validControler });
     });
 
     it('should return controller when provide a valid name', () => {
@@ -80,12 +80,12 @@ describe('ActionManager', () => {
     beforeEach(() => {
       validController = {};
       validAction = () => {};
-      actionLoaderStub = sinon.createStubInstance(DefaultActionLoader);
+      actionLoaderStub = Sinon.createStubInstance(DefaultActionLoader);
       actionManager.actionLoader = actionLoaderStub;
       actionLoaderStub.loadAction.withArgs(validController, 'validAction').returns(validAction);
       actionLoaderStub.loadAction.returns(undefined);
 
-      sinon.stub(actionManager, '_loadControllers').returns({ validController: validController });
+      Sinon.stub(actionManager, '_loadControllers').returns({ validController: validController });
     });
 
     it('should return an action when provide a valid action name', () => {

@@ -1,12 +1,12 @@
-import fs from 'fs';
-import path from 'path';
+import FS from 'fs';
+import Path from 'path';
 
 class DefaultFileLoader {
   constructor() { }
 
-  loadFiles(filePath) {
-    return fs.readdirSync(filePath).map((file) => {
-      return path.format({dir: filePath, base: file});
+  loadFiles(path) {
+    return FS.readdirSync(path).map((file) => {
+      return Path.format({dir: path, base: file});
     });
   }
 }

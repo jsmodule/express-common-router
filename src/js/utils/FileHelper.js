@@ -1,8 +1,8 @@
-import path from 'path';
+import Path from 'path';
 
 class FileHelper {
   static fileName(filePath) {
-    return path.basename(filePath, path.extname(filePath));
+    return Path.basename(filePath, Path.extname(filePath));
   }
 }
 

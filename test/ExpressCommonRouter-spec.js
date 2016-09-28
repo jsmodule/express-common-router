@@ -1,18 +1,18 @@
-import sinon from 'sinon';
-import chai, { expect } from 'chai';
+import Sinon from 'sinon';
+import Chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
-import express from 'express';
+import Express from 'express';
 import methods from 'methods';
 import ActionManager from '../src/js/ActionManager';
 import ExpressCommonRouter from '../src/js/ExpressCommonRouter';
-chai.use(SinonChai);
+Chai.use(SinonChai);
 
 describe('ExpressCommonRouter', () => {
   let expressCommonRouter, stubRouter, router, stubActionManager;
 
   before(() => {
-    stubRouter = sinon.stub(express, 'Router');
-    stubActionManager = sinon.createStubInstance(ActionManager);
+    stubRouter = Sinon.stub(Express, 'Router');
+    stubActionManager = Sinon.createStubInstance(ActionManager);
   });
 
   describe('#routes', () => {
@@ -38,8 +38,8 @@ describe('ExpressCommonRouter', () => {
       beforeEach(() => {
         router = {};
         router[method] = () => {};
-        spy = sinon.spy(router, method);
-        actionSpy = sinon.spy();
+        spy = Sinon.spy(router, method);
+        actionSpy = Sinon.spy();
         stubRouter.returns(router);
         stubActionManager.getAction.withArgs('handlerName').returns(actionSpy);
         stubActionManager.getAction.returns(undefined);
