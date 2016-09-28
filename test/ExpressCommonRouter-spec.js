@@ -3,8 +3,8 @@ import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import express from 'express';
 import methods from 'methods';
-import ActionManager from '../../src/js/ActionManager';
-import ExpressCommonRouter from '../../src/js/ExpressCommonRouter';
+import ActionManager from '../src/js/ActionManager';
+import ExpressCommonRouter from '../src/js/ExpressCommonRouter';
 chai.use(SinonChai);
 
 describe('ExpressCommonRouter', () => {

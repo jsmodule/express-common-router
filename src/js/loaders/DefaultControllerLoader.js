@@ -1,4 +1,4 @@
-import Validater from './Validater';
+import Validater from '../utils/Validater';
 
 class DefaultControllerLoader {
   constructor() { }

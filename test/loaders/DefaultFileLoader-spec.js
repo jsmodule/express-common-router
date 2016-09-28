@@ -1,6 +1,6 @@
 import path from 'path';
 import { expect } from 'chai';
-import DefaultFileLoader from '../../src/js/DefaultFileLoader';
+import DefaultFileLoader from '../../src/js/loaders/DefaultFileLoader';
 
 describe('DefaultFileLoader', () => {
   let fileLoader;
@@ -10,7 +10,7 @@ describe('DefaultFileLoader', () => {
   });
 
   it('should return correct files when give a exist path', () => {
-    let filePath = path.join(__dirname, './fixtures/');
+    let filePath = path.join(__dirname, '../fixtures/');
     expect(fileLoader.loadFiles(filePath)).to.have.lengthOf(3);
   });
 });

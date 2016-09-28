@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import Validater from '../../src/js/Validater';
+import Validater from '../../src/js/utils/Validater';
 
 describe('Validater', () => {
 

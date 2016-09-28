@@ -1,74 +1,63 @@
-import path from 'path';
-import Validater from './Validater';
-import DefaultFileLoader from './DefaultFileLoader';
-import DefaultActionLoader from './DefaultActionLoader';
-import DefaultControllerLoader from './DefaultControllerLoader';
+import Validater from './utils/Validater';
+import FileHelper from './utils/FileHelper';
+import DefaultFileLoader from './loaders/DefaultFileLoader';
+import DefaultActionLoader from './loaders/DefaultActionLoader';
+import DefaultControllerLoader from './loaders/DefaultControllerLoader';
 
 class ActionManager {
-  constructor() {
-    this.fileLoaderVal = new DefaultFileLoader();
-    this.actionLoaderVal = new DefaultActionLoader();
-    this.controllerLoaderVal = new DefaultControllerLoader();
+  constructor(path) {
+    this._path = path;
+    this._fileLoader = new DefaultFileLoader();
+    this._actionLoader = new DefaultActionLoader();
+    this._controllerLoader = new DefaultControllerLoader();
   }
 
-  set controllerPath(path) {
-    this.path = path;
-  }
+  set path(path) { this._path = path; }
+  get path() { return this._path; }
 
-  set actionLoader(loader) {
-    this.actionLoaderVal = loader;
-  }
+  set actionLoader(loader) { this._actionLoader = loader; }
+  get actionLoader() { return this._actionLoader; }
 
-  set fileLoader(loader) {
-    this.fileLoaderVal = loader;
-  }
+  set fileLoader(loader) { this._fileLoader = loader; }
+  get fileLoader() { return this._fileLoader; }
 
-  set controllerLoader(loader) {
-    this.controllerLoaderVal = loader;
-  }
+  set controllerLoader(loader) { this._controllerLoader = loader; }
+  get controllerLoader() { return this._controllerLoader; }
 
   get controllers() {
-    return this.controllerList || this.loadControllers();
+    return this._controllers || this._loadControllers();
   }
 
   getAction(handlerName) {
     if (Validater.isNotEmptyString(handlerName)) {
-      let controllerName = this.controllerName(handlerName);
-      if (this.hasController(controllerName)) {
-        return this.actionLoaderVal.loadAction(this.getController(controllerName), this.actionName(handlerName));
+      let [ controllerName, actionName ] = this._splitHandlerName(handlerName);
+      if (this._hasController(controllerName)) {
+        return this.actionLoader.loadAction(this._getController(controllerName), actionName);
       }
     }
   }
 
-  hasController(name) {
+  _hasController(name) {
     return this.controllers.hasOwnProperty(name);
   }
 
-  getController(name) {
+  _getController(name) {
     return this.controllers[name];
   }
 
-  loadControllers() {
-    this.controllerList = {};
-    this.fileLoaderVal.loadFiles(this.path).forEach((file) => {
-      let controller = this.controllerLoaderVal.loadController(file);
+  _loadControllers() {
+    this._controllers = {};
+    this.fileLoader.loadFiles(this._path).forEach((file) => {
+      let controller = this.controllerLoader.loadController(file);
       if (Validater.isValidObj(controller)) {
-        this.controllerList[this.fileName(file)] = controller;
+        this._controllers[FileHelper.fileName(file)] = controller;
       }
     });
-    return this.controllerList;
+    return this._controllers;
   }
 
-  fileName(file) {
-    return path.basename(file, path.extname(file));
-  }
-
-  controllerName(name) {
-    return name.split('#')[0];
-  }
-
-  actionName(name) {
-    return name.split('#')[1];
+  _splitHandlerName(name) {
+    return name.split('#');
   }
 }
 

@@ -1,10 +1,10 @@
 import sinon from 'sinon';
 import chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
-import DefaultFileLoader from '../../src/js/DefaultFileLoader';
-import DefaultActionLoader from '../../src/js/DefaultActionLoader';
-import DefaultControllerLoader from '../../src/js/DefaultControllerLoader';
-import ActionManager from '../../src/js/ActionManager';
+import DefaultFileLoader from '../src/js/loaders/DefaultFileLoader';
+import DefaultActionLoader from '../src/js/loaders/DefaultActionLoader';
+import DefaultControllerLoader from '../src/js/loaders/DefaultControllerLoader';
+import ActionManager from '../src/js/ActionManager';
 chai.use(SinonChai);
 
 describe('ActionManager', () => {
@@ -12,7 +12,7 @@ describe('ActionManager', () => {
 
   beforeEach(() => {
     actionManager = new ActionManager();
-    actionManager.controllerPath = 'file path';
+    actionManager.path = 'file path';
   });
 
   describe('#loadControllers', () => {
@@ -28,7 +28,7 @@ describe('ActionManager', () => {
       controllerLoaderStub.loadController.withArgs('valid.js').returns(resultObj);
       controllerLoaderStub.loadController.returns(undefined);
 
-      resultControllers = actionManager.loadControllers();
+      resultControllers = actionManager._loadControllers();
     });
 
     it('should calling fileloader to load files', () => {
@@ -47,15 +47,15 @@ describe('ActionManager', () => {
 
   describe('#hasController', () => {
     beforeEach(() => {
-      sinon.stub(actionManager, 'loadControllers').returns({valid: {}});
+      sinon.stub(actionManager, '_loadControllers').returns({valid: {}});
     });
 
     it('should return true when has the controller', () => {
-      expect(actionManager.hasController('valid')).to.be.true;
+      expect(actionManager._hasController('valid')).to.be.true;
     });
 
     it('should return false when given an invalid controller name', () => {
-      expect(actionManager.hasController('invalid')).to.be.false;
+      expect(actionManager._hasController('invalid')).to.be.false;
     });
   });
 
@@ -63,15 +63,15 @@ describe('ActionManager', () => {
     let validControler;
     beforeEach(() => {
       validControler = {};
-      sinon.stub(actionManager, 'loadControllers').returns({ valid: validControler });
+      sinon.stub(actionManager, '_loadControllers').returns({ valid: validControler });
     });
 
     it('should return controller when provide a valid name', () => {
-      expect(actionManager.getController('valid')).to.be.eql(validControler);
+      expect(actionManager._getController('valid')).to.be.eql(validControler);
     });
 
     it('should return undefined when provide an invalid name', () => {
-      expect(actionManager.getController('invalid')).to.be.undefined;
+      expect(actionManager._getController('invalid')).to.be.undefined;
     })
   });
 
@@ -85,7 +85,7 @@ describe('ActionManager', () => {
       actionLoaderStub.loadAction.withArgs(validController, 'validAction').returns(validAction);
       actionLoaderStub.loadAction.returns(undefined);
 
-      sinon.stub(actionManager, 'loadControllers').returns({ validController: validController });
+      sinon.stub(actionManager, '_loadControllers').returns({ validController: validController });
     });
 
     it('should return an action when provide a valid action name', () => {

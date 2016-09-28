@@ -3,30 +3,15 @@ import methods from 'methods';
 import ActionManager from './ActionManager';
 
 class ExpressCommonRouter {
-  constructor() {
+  constructor(path) {
     this.router = new Router();
-    this.manager = new ActionManager();
+    this.manager = new ActionManager(path);
   }
 
-  set controllerPath(path) {
-    this.manager.path = path;
-  }
+  set controllerPath(path) { this.manager.path = path; }
 
-  set actionManager(manager) {
-    this.manager = manager;
-  }
-
-  set actionLoader(loader) {
-    this.manager.actionLoader = loader;
-  }
-
-  set fileLoader(loader) {
-    this.manager.fileLoader = loader;
-  }
-
-  set controllerLoader(loader) {
-    this.manager.controllerLoader = loader;
-  }
+  set actionManager(manager) { this.manager = manager; }
+  get actionManager() { this.manager; }
 
   routes() {
     return this.router;

@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import DefaultActionLoader from '../../src/js/DefaultActionLoader';
+import DefaultActionLoader from '../../src/js/loaders/DefaultActionLoader';
 
 describe('DefaultActionLoader', () => {
   let actionLoader, controller;
