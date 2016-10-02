@@ -3,16 +3,16 @@ import Chai, { expect } from 'chai';
 import SinonChai from 'sinon-chai';
 import Express from 'express';
 import methods from 'methods';
-import ActionManager from '../src/js/ActionManager';
+import HandlerManager from '../src/js/HandlerManager';
 import ExpressCommonRouter from '../src/js/ExpressCommonRouter';
 Chai.use(SinonChai);
 
 describe('ExpressCommonRouter', () => {
-  let expressCommonRouter, stubRouter, router, stubActionManager;
+  let expressCommonRouter, stubRouter, router, stubHandlerManager;
 
   before(() => {
     stubRouter = Sinon.stub(Express, 'Router');
-    stubActionManager = Sinon.createStubInstance(ActionManager);
+    stubHandlerManager = Sinon.createStubInstance(HandlerManager);
   });
 
   describe('#routes', () => {
@@ -41,18 +41,18 @@ describe('ExpressCommonRouter', () => {
         spy = Sinon.spy(router, method);
         actionSpy = Sinon.spy();
         stubRouter.returns(router);
-        stubActionManager.getAction.withArgs('handlerName').returns(actionSpy);
-        stubActionManager.getAction.returns(undefined);
+        stubHandlerManager.getHandlerAction.withArgs('handlerPath').returns(actionSpy);
+        stubHandlerManager.getHandlerAction.returns(undefined);
         expressCommonRouter = new ExpressCommonRouter();
-        expressCommonRouter.actionManager = stubActionManager;
+        expressCommonRouter.manager = stubHandlerManager;
       });
 
-      it(`should pass correct parameter to invoke ${method} method of router when got a valid action with handler name`, () => {
-        expressCommonRouter[method].call(expressCommonRouter, '/', 'handlerName');
+      it(`should pass correct parameter to invoke ${method} method of router when got a valid action with handler path`, () => {
+        expressCommonRouter[method].call(expressCommonRouter, '/', 'handlerPath');
         expect(spy).to.have.been.calledWith('/', actionSpy);
       });
 
-      it('should throw a error when got a invalid action with handler name', () => {
+      it('should throw a error when got a invalid action with handler path', () => {
         expect(expressCommonRouter[method]).to.throw(TypeError);
       });
     });

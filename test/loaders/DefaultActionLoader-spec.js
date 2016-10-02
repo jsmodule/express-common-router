@@ -2,23 +2,23 @@ import { expect } from 'chai';
 import DefaultActionLoader from '../../src/js/loaders/DefaultActionLoader';
 
 describe('DefaultActionLoader', () => {
-  let actionLoader, controller;
+  let actionLoader, handler;
 
   beforeEach(() => {
-    controller = {};
+    handler = {};
     actionLoader = new DefaultActionLoader();
   });
 
-  it('should return controller when given a empty action name', () => {
-    expect(actionLoader.loadAction(controller, '')).to.be.equal(controller);
+  it('should return handler when given a empty action name', () => {
+    expect(actionLoader.loadAction(handler, '')).to.be.equal(handler);
   });
 
   it('should return undefined when given a invalid action name', () => {
-    expect(actionLoader.loadAction(controller, 'invalid')).to.be.undefined;
+    expect(actionLoader.loadAction(handler, 'invalid')).to.be.undefined;
   });
 
   it('should return action when given a valid action name', () => {
-    controller['valid'] = () => {};
-    expect(actionLoader.loadAction(controller, 'valid')).to.be.a('function');
+    handler['valid'] = () => {};
+    expect(actionLoader.loadAction(handler, 'valid')).to.be.a('function');
   });
 });

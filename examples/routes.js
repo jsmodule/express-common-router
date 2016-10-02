@@ -2,10 +2,10 @@ import path from 'path';
 import ExpressCommonRouter from '../lib';
 
 const router = new ExpressCommonRouter();
-router.controllerPath = path.join(__dirname, './js/controllers');
+router.path = path.join(__dirname, './js/handlers');
 
-router.use('/hello', 'HelloController');
-router.get('/test/index', 'TestController#index');
-router.get('/test/show', 'TestController#show');
+router.use('/hello', 'Hello');
+router.get('/test/index', 'Test#index');
+router.get('/test/show', 'Test#show');
 
 module.exports = router.routes();
