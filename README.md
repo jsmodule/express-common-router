@@ -133,7 +133,7 @@ export default CustomHandlerManager;
 * Config CustomHandlerManager into router config file.
 
 ```js
-import { ExpressCommonRouter } from '../lib';
+import ExpressCommonRouter from 'express-common-router';
 import CustomHandlerManager from './CustomHandlerManager';
 
 const router = new ExpressCommonRouter();
