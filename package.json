@@ -1,6 +1,6 @@
 {
   "name": "express-common-router",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Common routes for express",
   "main": "lib/index.js",
   "engines": {
