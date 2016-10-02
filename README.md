@@ -20,17 +20,17 @@ $ npm install express-common-router
 
 ### First step:
 
-Create two controllers:
+Create two handlers:
 
-* HelloController.js
+* Hello.js
 
 ```js
 module.exports = function(req, res, next) {
-  res.send("Hello Controller");
+  res.send("Hello World");
 };
 ```
 
-* TestController.js
+* Test.js
 
 ```js
 exports.index = function(req, res) {
@@ -49,14 +49,14 @@ Create a routes config.
 
 ```js
 const path = require('path');
-const ExpressCommonRouter = require('express-common-router').ExpressCommonRouter;
+const ExpressCommonRouter = require('express-common-router').default;
 
-const router = new ExpressCommonRouter();
-router.controllerPath = path.join(__dirname, './js/controllers');
+const handlerPath = path.join(__dirname, './js/handlers')
+const router = new ExpressCommonRouter(handlerPath);
 
-router.use('/hello', 'HelloController'); //Must use the same name with file name.
-router.get('/test/index', 'TestController#index'); //Controller name and action name separated by '#'
-router.get('/test/index', 'TestController#index'); //More method please refer to 'express'
+router.use('/hello', 'Hello'); //Must use the same name with file name.
+router.get('/test/index', 'Test#index'); //Handler name and action name separated by '#'
+router.get('/test/index', 'Test#index'); //More method please refer to 'express'
 
 module.exports = router.routes();
 ```
@@ -65,14 +65,14 @@ ES6 Style
 
 ```js
 import path from 'path';
-import { ExpressCommonRouter } from '../lib';
+import ExpressCommonRouter from 'express-common-router';
 
 const router = new ExpressCommonRouter();
-router.controllerPath = path.join(__dirname, './js/controllers');
+router.path = path.join(__dirname, './js/handlers');
 
-router.use('/hello', 'HelloController');
-router.get('/test/index', 'TestController#index');
-router.get('/test/show', 'TestController#show');
+router.use('/hello', 'Hello'); //Must use the same name with file name.
+router.get('/test/index', 'Test#index'); //Handler name and action name separated by '#'
+router.get('/test/index', 'Test#index'); //More method please refer to 'express'
 
 module.exports = router.routes();
 ```
@@ -99,14 +99,45 @@ app.listen(3000, '0.0.0.0', (err) => {
 
 ## More Details
 
-### Set controller path
+### How to set handler file path?
 
-Calling `controllerPath` method for ExpressCommonRouter class.
+* Passing `path` as a parameter when create an instance of ExpressCommonRouter.
+
+```js
+
+const handlerPath = path.join(__dirname, './handlers');
+const router = new ExpressCommonRouter(handlerPath);
+```
+
+* Calling `path` method for ExpressCommonRouter instance.
 
 ```js
 
 const router = new ExpressCommonRouter();
-router.controllerPath = path.join(__dirname, './controllers');
+router.path = path.join(__dirname, './handlers');
+```
+
+### Set custom HandlerManager.
+
+* Create a custom HandlerManager like this:
+
+```js
+class CustomHandlerManager {
+  getHandlerAction(actionPath) {
+    ...
+  }
+}
+export default CustomHandlerManager;
+```
+
+* Config CustomHandlerManager into router config file.
+
+```js
+import { ExpressCommonRouter } from '../lib';
+import CustomHandlerManager from './CustomHandlerManager';
+
+const router = new ExpressCommonRouter();
+router.manager.actionManager = new CustomHandlerManager();
 ```
 
 ### Set custom FileLoader.
@@ -115,7 +146,7 @@ router.controllerPath = path.join(__dirname, './controllers');
 
 ```js
 class CustomFileLoader {
-  loadFiles(controllerPath) {
+  loadFiles(handlerPath) {
     ...
   }
 }
@@ -125,34 +156,34 @@ export default CustomFileLoader;
 * Config CustomFileLoader into router config file.
 
 ```js
-import { ExpressCommonRouter } from '../lib';
+import ExpressCommonRouter from 'express-common-router';
 import CustomFileLoader from './CustomFileLoader';
 
 const router = new ExpressCommonRouter();
-router.fileLoader = new CustomFileLoader();
+router.manager.fileLoader = new CustomFileLoader();
 ```
 
-### Set custom ControllerLoader.
+### Set custom HandlerLoader.
 
-* Create a custom ControllerLoader like this:
+* Create a custom HandlerLoader like this:
 
 ```js
-class CustomControllerLoader {
-  loadController(controllerFile) {
+class CustomHandlerLoader {
+  loadHandler(handlerFile) {
     ...
   }
 }
-export default CustomControllerLoader;
+export default CustomHandlerLoader;
 ```
 
-* Config CustomControllerLoader into router config file.
+* Config CustomHandlerLoader into router config file.
 
 ```js
-import { ExpressCommonRouter } from '../lib';
-import CustomControllerLoader from './CustomControllerLoader';
+import ExpressCommonRouter from 'express-common-router';
+import CustomHandlerLoader from './CustomHandlerLoader';
 
 const router = new ExpressCommonRouter();
-router.controllerLoader = new CustomControllerLoader();
+router.manager.handlerLoader = new CustomHandlerLoader();
 ```
 
 ### Set custom ActionLoader.
@@ -161,7 +192,7 @@ router.controllerLoader = new CustomControllerLoader();
 
 ```js
 class CustomActionLoader {
-  loadAction(controller, actionName) {
+  loadAction(handler, actionName) {
     ...
   }
 }
@@ -171,35 +202,13 @@ export default CustomActionLoader;
 * Config CustomActionLoader into router config file.
 
 ```js
-import { ExpressCommonRouter } from '../lib';
+import ExpressCommonRouter from 'express-common-router';
 import CustomActionLoader from './CustomActionLoader';
 
 const router = new ExpressCommonRouter();
-router.actionLoader = new CustomActionLoader();
+router.manager.actionLoader = new CustomActionLoader();
 ```
 
-### Set custom ActionsManager.
-
-* Create a custom ActionsManager like this:
-
-```js
-class CustomActionManager {
-  getAction(handlerName) {
-    ...
-  }
-}
-export default CustomActionManager;
-```
-
-* Config CustomActionsManager into router config file.
-
-```js
-import { ExpressCommonRouter } from '../lib';
-import CustomActionManager from './CustomActionManager';
-
-const router = new ExpressCommonRouter();
-router.actionManager = new CustomActionManager();
-```
 
 ### Config your routes.
 
