@@ -10,7 +10,7 @@
     "lib"
   ],
   "scripts": {
-    "start": "node public/server.js",
+    "start": "npm run build && node public/server.js",
     "lint": "eslint src",
     "clean": "rm -rf ./lib ./public",
     "babel": "babel src -d lib && babel examples -d public",
