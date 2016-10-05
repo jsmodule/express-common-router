@@ -215,3 +215,7 @@ router.manager.actionLoader = new CustomActionLoader();
 This component support all methods which supported by `express`.
 
 About the details of config route, please refer to here: [Express Router](http://www.expressjs.com.cn/guide/routing.html)
+
+## License
+
+express-common-router is released under the MIT license.
