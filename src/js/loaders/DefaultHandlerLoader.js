@@ -1,11 +1,11 @@
-import Validater from '../utils/Validater';
+import { ObjectValidator, FunctionValidator } from 'common-basic-validator';
 
 class DefaultHandlerLoader {
   constructor() { }
 
   loadHandler(handlerFile) {
     let handler = require(handlerFile);
-    if (Validater.isValidFun(handler) || Validater.isNotEmptyObj(handler)) {
+    if (FunctionValidator.isFunction(handler) || ObjectValidator.hasAnyProperty(handler)) {
       return handler;
     }
   }

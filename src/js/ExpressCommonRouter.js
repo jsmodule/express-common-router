@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import methods from 'methods';
-import Validater from './utils/Validater';
 import HandlerManager from './HandlerManager';
+import { FunctionValidator } from 'common-basic-validator';
 
 class ExpressCommonRouter {
   constructor(path) {
@@ -20,7 +20,7 @@ class ExpressCommonRouter {
 
   _bindMethodWithAction(method, routePath, actionPath) {
     let action = this.manager.getHandlerAction(actionPath);
-    if (Validater.isValidFun(action)) {
+    if (FunctionValidator.isFunction(action)) {
       this._router[method].call(this._router, routePath, action);
     } else {
       throw new TypeError('Can not find \'' + actionPath + '\' action.');

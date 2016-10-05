@@ -1,20 +1,16 @@
-import Validater from '../utils/Validater';
+import { ObjectValidator, StringValidator } from 'common-basic-validator';
 
 class DefaultActionLoader {
   constructor() { }
 
   loadAction(handler, actionName) {
-    if (Validater.isNotEmptyString(actionName)) {
-      if (this._isValidAction(handler, actionName)) {
+    if (StringValidator.isNotBlank(actionName)) {
+      if (ObjectValidator.hasProperty(handler, actionName)) {
         return handler[actionName];
       }
     } else {
       return handler;
     }
-  }
-
-  _isValidAction(handler, actionName) {
-    return Validater.isValidObj(handler) && handler.hasOwnProperty(actionName);
   }
 }
 

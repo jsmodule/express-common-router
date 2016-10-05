@@ -1,8 +1,8 @@
-import Validater from './utils/Validater';
 import FileHelper from './utils/FileHelper';
 import DefaultFileLoader from './loaders/DefaultFileLoader';
 import DefaultActionLoader from './loaders/DefaultActionLoader';
 import DefaultHandlerLoader from './loaders/DefaultHandlerLoader';
+import { Validator, StringValidator } from 'common-basic-validator';
 
 class HandlerManager {
   constructor(path) {
@@ -29,7 +29,7 @@ class HandlerManager {
   }
 
   getHandlerAction(actionPath) {
-    if (Validater.isNotEmptyString(actionPath)) {
+    if (StringValidator.isNotBlank(actionPath)) {
       let [ handlerName, actionName ] = this._resolveActionPath(actionPath);
       if (this._hasHandler(handlerName)) {
         return this.actionLoader.loadAction(this._getHandler(handlerName), actionName);
@@ -41,7 +41,7 @@ class HandlerManager {
     this._handlers = {};
     this.fileLoader.loadFiles(this._path).forEach((file) => {
       let handler = this.handlerLoader.loadHandler(file);
-      if (Validater.isValidObj(handler)) {
+      if (Validator.isAnyValidValue(handler)) {
         this._handlers[FileHelper.fileName(file)] = handler;
       }
     });
