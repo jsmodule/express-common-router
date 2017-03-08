@@ -28,7 +28,7 @@ class ExpressCommonRouter {
   }
 }
 
-methods.concat('use').forEach((method) => {
+methods.concat('all', 'use').forEach((method) => {
   ExpressCommonRouter.prototype[method] = function(routePath, handlerPath) {
     this._bindMethodWithAction(method, routePath, handlerPath);
   };

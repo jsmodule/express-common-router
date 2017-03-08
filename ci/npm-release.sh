@@ -1,5 +1,5 @@
 #! bin/bash
 set -e -u
 
-npm run prepare
-npm publish
+yarn run release:prepare
+yarn publish

@@ -1,6 +1,6 @@
 {
   "name": "express-common-router",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "Common routes for express",
   "main": "lib/index.js",
   "engines": {
@@ -10,17 +10,17 @@
     "lib"
   ],
   "scripts": {
-    "start": "npm run build && node public/server.js",
+    "start": "yarn run build && node public/server.js",
     "lint": "eslint src",
     "clean": "rm -rf ./lib ./public",
     "babel": "babel src -d lib && babel examples -d public",
-    "build": "npm run clean && npm run babel",
-    "unit-test": "mocha --compilers js:babel-register test/*.js test/**/*.js",
-    "test": "npm run lint && npm run unit-test",
-    "prepare": "npm install && npm prune && npm run build",
-    "git-release": "/bin/bash ./ci/git-release.sh",
-    "npm-release": "/bin/bash ./ci/npm-release.sh",
-    "release": "npm run git-release && npm run npm-release"
+    "build": "yarn run clean && yarn run babel",
+    "test": "yarn run lint && yarn run test:unit",
+    "test:unit": "mocha --compilers js:babel-register test/*.js test/**/*.js",
+    "release": "yarn run release:git && yarn run release:npm",
+    "release:prepare": "yarn install && yarn prune && yarn run build",
+    "release:git": "/bin/bash ./ci/git-release.sh",
+    "release:npm": "/bin/bash ./ci/npm-release.sh"
   },
   "dependencies": {
     "common-basic-validator": "^0.3.1",

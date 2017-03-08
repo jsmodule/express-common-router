@@ -13,7 +13,7 @@ Current Status:
 ## Installation
 
 ```
-$ npm install express-common-router
+$ npm|yarn install express-common-router
 ```
 
 ## Usage
@@ -41,6 +41,14 @@ exports.show = function(req, res) {
 }
 ```
 
+* NotFound.js
+
+```js
+exports.index = function(req, res) {
+  res.send("Not Found");
+};
+```
+
 ### Second step:
 
 Create a routes config.
@@ -57,6 +65,7 @@ const router = new ExpressCommonRouter(handlerPath);
 router.use('/hello', 'Hello'); //Must use the same name with file name.
 router.get('/test/index', 'Test#index'); //Handler name and action name separated by '#'
 router.get('/test/index', 'Test#index'); //More method please refer to 'express'
+router.all('*', 'NotFound'); //More method please refer to 'express'
 
 module.exports = router.routes();
 ```

@@ -31,7 +31,7 @@ describe('ExpressCommonRouter', () => {
     });
   });
 
-  methods.concat('use').forEach((method) => {
+  methods.concat('all', 'use').forEach((method) => {
     describe('#' + method, () => {
       let spy, actionSpy;
 
