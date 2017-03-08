@@ -910,7 +910,7 @@ commander@2.9.0, commander@^2.8.1:
   dependencies:
     graceful-readlink ">= 1.0.0"
 
-common-basic-validator@^0.3.1:
+common-basic-validator@^0.3.2:
   version "0.3.2"
   resolved "https://registry.yarnpkg.com/common-basic-validator/-/common-basic-validator-0.3.2.tgz#78e6501e2d5939f79e4c3fae8130919bfa99a2b4"
 

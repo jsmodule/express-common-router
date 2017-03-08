@@ -23,7 +23,7 @@
     "release:npm": "/bin/bash ./ci/npm-release.sh"
   },
   "dependencies": {
-    "common-basic-validator": "^0.3.1",
+    "common-basic-validator": "^0.3.2",
     "express": "^4.14.0",
     "methods": "^1.1.2",
     "path": "^0.12.7"
