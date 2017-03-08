@@ -1,5 +1,6 @@
 #! bin/bash
 set -e -u
 
-yarn run release:prepare
+yarn install
+yarn run build
 yarn publish
